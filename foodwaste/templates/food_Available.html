@@ -1,0 +1,69 @@
+{% extends 'navbar.html' %}
+{% block main %}
+{% load static %}
+
+<!-- Page Header Start -->
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Food Available List</h2>
+            </div>
+            <div class="col-12">
+                <a href="{% url 'index' %}">Home</a>
+                <a href="{% url 'food_Available' %}">Food Available List</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Signup Start -->
+<div class="food">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>Food Available List</h2>
+        </div>
+        <div class="food-img">
+            <img src="{% static 'img/contact.jpg' %}" alt="Image">
+        </div>
+        <div class="food-form" style="width: 100%">
+            <div id="success"></div>
+            <table id="example" class="table table-bordered" style="width: 100%">
+                <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Contact Person</th>
+                    <th>Contact Person No.</th>
+                    <th>Food Items</th>
+                    <th>Address</th>
+                    <th>State Name</th>
+                    <th>City Name</th>
+                    <th>Creation Date</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in food %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.ContactPerson}}</td>
+                        <td>{{i.CPMobNumber}}</td>
+                        <td>{{i.FoodItems}}</td>
+                        <td>{{i.PickupAddress}}</td>
+                        <td>{{i.city.state.StateName}}</td>
+                        <td>{{i.city.CityName}}</td>
+                        <td>{{i.CreationDate}}</td>
+                        <td><a href="{% url 'checkFoodAvailable' i.id %}" class="text-primary">View</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Signup End -->
+
+
+{% endblock %}
